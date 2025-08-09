@@ -1,0 +1,72 @@
+/* Query 1 - Countries with the Most Invoices */
+SELECT
+    Customer.Country,
+    COUNT(Invoice.InvoiceId) AS Invoices
+FROM
+    Invoice
+JOIN
+    Customer ON Invoice.CustomerId = Customer.CustomerId
+GROUP BY
+    Customer.Country
+ORDER BY
+    Invoices DESC;
+
+
+/* Explanation:
+Groups invoices by billing country and counts the total invoices per country,
+showing which countries have the most transactions.
+*/
+
+
+/* Query 2 - Total Sales by Music Genre */
+SELECT Genre.Name AS GenreName, SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) AS TotalSales
+FROM InvoiceLine
+JOIN Track ON InvoiceLine.TrackId = Track.TrackId
+JOIN Genre ON Track.GenreId = Genre.GenreId
+GROUP BY Genre.Name
+ORDER BY TotalSales DESC;
+
+/* Explanation:
+Joins InvoiceLine, Track, and Genre tables to calculate total sales revenue per music genre.
+Groups by genre to identify the most popular and profitable genres.
+*/
+
+
+/* Query 3 - Top 10 Artists by Total Earnings */
+SELECT Artist.Name AS ArtistName, SUM(InvoiceLine.UnitPrice * InvoiceLine.Quantity) AS TotalEarnings
+FROM InvoiceLine
+JOIN Track ON InvoiceLine.TrackId = Track.TrackId
+JOIN Album ON Track.AlbumId = Album.AlbumId
+JOIN Artist ON Album.ArtistId = Artist.ArtistId
+GROUP BY Artist.Name
+ORDER BY TotalEarnings DESC
+LIMIT 10;
+
+/* Explanation:
+Aggregates revenue by artist by joining invoice data with track, album, and artist information,
+then orders to find the top earning artists.
+*/
+
+
+/* Query 4 - Highest Spending Customer per Country */
+WITH CustomerSpent AS (
+    SELECT Customer.Country, Customer.CustomerId, Customer.FirstName, Customer.LastName,
+           SUM(Invoice.Total) AS TotalSpent
+    FROM Customer
+    JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+    GROUP BY Customer.Country, Customer.CustomerId, Customer.FirstName, Customer.LastName
+),
+RankedSpenders AS (
+    SELECT Country, CustomerId, FirstName, LastName, TotalSpent,
+           RANK() OVER (PARTITION BY Country ORDER BY TotalSpent DESC) AS spend_rank
+    FROM CustomerSpent
+)
+SELECT Country, TotalSpent, FirstName, LastName, CustomerId
+FROM RankedSpenders
+WHERE spend_rank = 1
+ORDER BY Country, FirstName, LastName;
+
+/* Explanation:
+Computes total spent per customer for each country, ranks customers within countries by spending,
+and returns the highest spender(s) per country (including ties).
+*/
