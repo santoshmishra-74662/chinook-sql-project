@@ -42,3 +42,7 @@ Database: Chinook SQLite database
 SQL Dialect: SQLite
 
 Tools: DB Browser for SQLite, Excel / Google Sheets for visualization, GitHub for project sharing.
+
+
+<img width="1211" height="673" alt="ppt1" src="https://github.com/user-attachments/assets/0f780875-4884-4b41-8c77-439f530cb74f" />
+
