@@ -46,3 +46,12 @@ Tools: DB Browser for SQLite, Excel / Google Sheets for visualization, GitHub fo
 
 <img width="1211" height="673" alt="ppt1" src="https://github.com/user-attachments/assets/0f780875-4884-4b41-8c77-439f530cb74f" />
 
+<img width="1203" height="659" alt="ppt2" src="https://github.com/user-attachments/assets/5d0be73d-8134-4972-bf93-6702aa7fffb2" />
+
+<img width="1198" height="674" alt="ppt3" src="https://github.com/user-attachments/assets/8e6c1f5f-6258-4352-9dee-bdf58e9d0352" />
+
+<img width="1205" height="678" alt="ppt4" src="https://github.com/user-attachments/assets/731d8389-9a41-4644-9693-ae0ba809f244" />
+
+
+
+
